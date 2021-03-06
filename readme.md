@@ -13,6 +13,8 @@ git config --local user.email 'nigelathome@126.com'
 ```
 git config --local --list | grep -i user.name
 git config --local --list | grep -i user.email
+git config --local user.name
+git config --local user.email
 ```
 ###3.已有的目录初始化为git仓库
 ```
