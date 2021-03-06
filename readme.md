@@ -47,6 +47,20 @@ git commit -am '改动内容'
 ```
 git rest --hard
 ```
+##分支管理
+###1.查看本地分支
+```
+git branch -v
+```
+###2.创建分支
+```
+git checkout -b 分支名 基于的历史提交id
+```
+###3.切换分支
+```
+git checkout master
+```
+
 ##状态查看
 ###1.查看提交状态
 ```
@@ -55,8 +69,10 @@ git status
 ###2.查看提交历史
 --oneline展示简单的提交信息，-n可以查看最近n次提交
 --graph图形方式展示提交历史
+--all查看所有分支的历史
 ```
-git log --oneline -n 
+git log --oneline
+git long --all 
 ```
 ##其他操作
 ###1.重命名文件
