@@ -65,8 +65,10 @@ git status
 ###2.查看提交历史
 --oneline展示简单的提交信息，-n可以查看最近n次提交
 --graph图形方式展示提交历史
+--all查看所有分支的历史
 ```
-git log --oneline -n 
+git log --oneline
+git long --all 
 ```
 ##其他操作
 ###1.重命名文件
