@@ -43,10 +43,24 @@ git commit -m '改动的内容'
 ```
 git commit -am '改动内容'
 ```
-###4.更改文件名字
+###4.清除暂存区和工作目录所有改动
 ```
-git mv file_old_name file_new_name
+git rest --hard
 ```
+##分支管理
+###1.查看本地分支
+```
+git branch -v
+```
+###2.创建分支
+```
+git checkout -b 分支名 基于的历史提交id
+```
+###3.切换分支
+```
+git checkout master
+```
+
 ##状态查看
 ###1.查看提交状态
 ```
@@ -55,9 +69,20 @@ git status
 ###2.查看提交历史
 --oneline展示简单的提交信息，-n可以查看最近n次提交
 --graph图形方式展示提交历史
+--all查看所有分支的历史
 ```
-git log --oneline -n 
+git log --oneline
+git long --all 
+```
+##其他操作
+###1.重命名文件
+```
+git mv file_old file_new
+```
+###2.删除文件
+```
+git rm file
 ```
 
-
-
+##补充说明
+1.author和committer不同的场景：A分支上有个提交c1，提交人是X，我在B分支上`cherry-pick` A分支上的c1提交。然后在B上提交这个c1，此时B上的提交是c2，提交人是我，而作者是X
