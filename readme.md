@@ -83,3 +83,6 @@ git mv file_old file_new
 ```
 git rm file
 ```
+
+##补充说明
+1.author和committer不同的场景：A分支上有个提交c1，提交人是X，我在B分支上`cherry-pick` A分支上的c1提交。然后在B上提交这个c1，此时B上的提交是c2，提交人是我，而作者是X
