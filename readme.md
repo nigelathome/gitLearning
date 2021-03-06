@@ -43,9 +43,9 @@ git commit -m '改动的内容'
 ```
 git commit -am '改动内容'
 ```
-###4.更改文件名字
+###4.清除暂存区和工作目录所有改动
 ```
-git mv file_old_name file_new_name
+git rest --hard
 ```
 ##状态查看
 ###1.查看提交状态
@@ -58,6 +58,12 @@ git status
 ```
 git log --oneline -n 
 ```
-
-
-
+##其他操作
+###1.重命名文件
+```
+git mv file_old file_new
+```
+###2.删除文件
+```
+git rm file
+```
