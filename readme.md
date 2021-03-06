@@ -23,7 +23,7 @@ git init
 ```
 ###4.新建同时初始化一个git仓库
 ```
-git init $仓库名字
+git init $不存在的目录
 ```
 ##代码提交
 ###1.加入暂存区
@@ -62,7 +62,15 @@ git checkout -b 分支名 基于的历史提交id
 ```
 git checkout master
 ```
-
+###4.切换commit
+```
+git checkout commitID
+```
+切换完之后处于detached HEAD（分离头指针)状态
+###5.分离头指针下提交分支
+```
+git branch名字 commitID
+```
 ##状态查看
 ###1.查看提交状态
 ```
@@ -91,5 +99,6 @@ git rm file
 2.`.git/config`仓库的配置信息；`.git/HEAD`指向的分支；`.git/refs/heads/master`存放了提交id；  
 3.git对象包括commit、tree、blob、tag等。通过命令`git cat-file -t 对象id`查看；`git cat-file -p 对象id`可以查看对象内容   
 4.所有的对象存储在`.git/objects`目录下，对象id由`目录前缀+目录下的哈希值构成`。例如objects下的8e目录下有个xyz，此时对象id是8exyz  
-5.暂存区和版本历史的内容都会创建对应的对象，工作区的修改不会创建对象
-5.tag是里程碑的含义，可以用来给上线版本打标记
+5.暂存区和版本历史的内容都会创建对应的对象，工作区的修改不会创建对象  
+6.tag是里程碑的含义，可以用来给上线版本打标记  
+7.分离头指针下做的commit，在切换到别的分支的时候不能查看需要做新重新建分支才能看到
