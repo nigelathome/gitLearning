@@ -76,6 +76,52 @@ git branch名字 commitID
 ```
 git branch -d 分支名
 ```
+##变基
+###1.修改commit
+修改最新的最近一次直接通过git commit --amend。然后编辑要修改的commit
+
+```
+git commit --amend
+```
+
+如果是老旧的commit，通过rebase操作。先要找到需要更改的commit的`parent` commit id。例如我要修改commit是dfgga，它的parent commit id是e62cc。那么使用命令：
+
+```
+git rebase -i e62cc
+```
+进入交互界面。此时找到dfgga这个提交，将pick改成`reword`。然后会进入一个关于dfgga的编辑界面，进行对commit的编辑，然后保存即可
+
+###2.合并多个commit
+假设这样的创建，我想合并commit1，commit2，commit3.那么我找到这3个commit中的父commit id。假设1是最新的commit
+
+```
+git rebase -i {父commit id}
+```
+进入编辑界面后，将commit2和commit3的操作变成squash（挤压）
+
+```
+pick commit1
+s commit2
+s commit3
+pick other
+```
+保存后进入commit1的编辑界面，编辑commit，然后保存退出即可
+###3.合并远端分支
+作用等同于git pull（git fetch然后再merge），不同的是这个操作完成之后不会产生无效的commit
+
+```
+git pull --rebase
+```
+###4.继续进行变基
+
+```
+git rebase --continue
+```
+###5.放弃编辑
+
+```
+git rebase --abort
+```
 ##状态查看
 ###1.查看提交状态
 ```
@@ -99,10 +145,7 @@ git mv file_old file_new
 ```
 git rm file
 ```
-###3.修改最近一次提交的message
-```
-git
-```
+
 ##补充说明
 1.author和committer不同的场景：A分支上有个提交c1，提交人是X，我在B分支上`cherry-pick` A分支上的c1提交。然后在B上提交这个c1，此时B上的提交是c2，提交人是我，而作者是X    
 2.`.git/config`仓库的配置信息；`.git/HEAD`指向的分支；`.git/refs/heads/master`存放了提交id；  
