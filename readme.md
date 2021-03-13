@@ -122,6 +122,23 @@ git rebase --continue
 ```
 git rebase --abort
 ```
+##本地仓库同步远端
+###1.添加本地仓库到远程仓库
+需要先在gitHub创建仓库，并拿到ssh地址。例如：git@github.com:nigelathome/gitLearning.git
+本地仓库下执行：
+
+```
+git remote add {远程仓库名} git@github.com:nigelathome/gitLearning.git
+```
+###2.查看远程仓库
+```
+git remote -v
+```
+###3.将本地推往远端仓库
+```
+git push {远程仓库名} --all
+```
+
 ##状态查看
 ###1.查看提交状态
 ```
