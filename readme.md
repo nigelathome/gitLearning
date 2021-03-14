@@ -204,7 +204,25 @@ git mv file_old file_new
 git rm file
 ```
 ###3.不需要git管理
-编辑`.gitignore`文件
+编辑`.gitignore`文件。例如要忽略xcodeproj和xcworkspace，以及Pods下的文件
+
+```
+.xcbkptlist
+*.xcuserstate
+xcuserdata
+UserInterfaceState.xcuserstate
+*.xcworkspace/
+*.xcodeproj/
+xcuserdata/
+UserInterface.xcuserstate
+
+Pods/
+```
+
+如果编辑之后不生效需要清理git缓存
+```
+git rm --cache music.xcodeproj/ -r
+```
 
 ###4.查看当前状态
 ```
