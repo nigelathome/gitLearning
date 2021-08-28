@@ -25,6 +25,7 @@ git init
 ```
 git init $不存在的目录
 ```
+
 ##代码提交
 ###1.加入暂存区
 将改动从工作区提交到暂存区使用git add命令。命令可以带多个文件，也可以指定一个文件
@@ -49,6 +50,7 @@ git commit -am '改动内容'
 ```
 git rest --hard
 ```
+
 ##分支管理
 ###1.查看分支
 ```
@@ -70,7 +72,7 @@ git checkout commitID
 切换完之后处于detached HEAD（分离头指针)状态
 ###5.分离头指针下提交分支
 ```
-git branch名字 commitID
+git branch branch名字 commitID
 ```
 ###6.删除分支
 ```
@@ -108,13 +110,13 @@ git stash clear
 ```
 
 ##变基
-###1.修改commit
-修改最新的最近一次直接通过git commit --amend。然后编辑要修改的commit
+###1.修改最近一次commit msg
 
 ```
 git commit --amend
 ```
 
+###2.修改旧的commit msg
 如果是老旧的commit，通过rebase操作。先要找到需要更改的commit的`parent` commit id。例如我要修改commit是dfgga，它的parent commit id是e62cc。那么使用命令：
 
 ```
@@ -122,7 +124,7 @@ git rebase -i e62cc
 ```
 进入交互界面。此时找到dfgga这个提交，将pick改成`reword`。然后会进入一个关于dfgga的编辑界面，进行对commit的编辑，然后保存即可
 
-###2.合并多个commit
+###3.合并多个commit
 假设这样的创建，我想合并commit1，commit2，commit3.那么我找到这3个commit中的父commit id。假设1是最新的commit
 
 ```
@@ -154,7 +156,7 @@ git rebase --continue
 git rebase --abort
 ```
 
-##同步远程仓库
+##同步远程仓库 
 ###1.添加本地仓库到远程仓库
 需要先在gitHub创建仓库，并拿到ssh地址。例如：git@github.com:nigelathome/gitLearning.git
 本地仓库下执行：
@@ -194,6 +196,13 @@ git log默认查看当前分支的提交历史。查看全部分支的提交历�
 git log --all --graph
 ```
 
+###4、查看不同提交的差异
+比较commit-id分别是c8cb16c8fac96和8da976aaa
+
+```
+git diff c8cb16c8fac96 8da976aaa
+```
+
 ##其他操作
 ###1.重命名文件
 ```
@@ -229,12 +238,12 @@ git rm --cache music.xcodeproj/ -r
 git status 
 ```
 
-##补充说明
+##说明
 1.author和committer不同的场景：A分支上有个提交c1，提交人是X，我在B分支上`cherry-pick` A分支上的c1提交。然后在B上提交这个c1，此时B上的提交是c2，提交人是我，而作者是X    
 2.`.git/config`仓库的配置信息；`.git/HEAD`指向的分支；`.git/refs/heads/master`存放了提交id；  
 3.git对象包括commit、tree、blob、tag等。通过命令`git cat-file -t 对象id`查看；`git cat-file -p 对象id`可以查看对象内容   
 4.所有的对象存储在`.git/objects`目录下，对象id由`目录前缀+目录下的哈希值构成`。例如objects下的8e目录下有个xyz，此时对象id是8exyz  
 5.暂存区和版本历史的内容都会创建对应的对象，工作区的修改不会创建对象  
 6.tag是里程碑的含义，可以用来给上线版本打标记  
-7.分离头指针下做的commit，在切换到别的分支的时候不能查看需要建立新的分支才能看到
+7.头指针HEAD通常会跟一个分支绑定，例如HEAD -> master。如果HEAD不指向具体的分支，只指向commit，此时就是分离头指针的状态。分离头指针下做的commit，在切换到别的分支的时候可能会被丢弃。要想保留变更需要建立一个分支和这个变更挂钩，例如 git branch <branch-name> commit-id（基于commit-id建立分支)
 8.HEAD指代当前的提交，`HEAD~n`指代当前提交的n级祖先
