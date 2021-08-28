@@ -23,6 +23,7 @@ git init
 ```
 git init $仓库名字
 ```
+
 ##代码提交
 ###1.加入暂存区
 将改动从工作区提交到暂存区使用git add命令。命令可以带多个文件，也可以指定一个文件
@@ -45,8 +46,9 @@ git commit -am '改动内容'
 ```
 ###4.清除暂存区和工作目录所有改动
 ```
-git rest --hard
+git reset --hard
 ```
+
 ##分支管理
 ###1.查看本地分支
 ```
@@ -74,6 +76,7 @@ git status
 git log --oneline
 git long --all 
 ```
+
 ##其他操作
 ###1.重命名文件
 ```
