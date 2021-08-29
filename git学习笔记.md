@@ -250,12 +250,12 @@ git log --all --graph
 
 ###4、查看不同提交的差异
 比较commit-id分别是c8cb16c8fac96和8da976aaa
-
+也可以使用分支名字，因为分支名本质就是对应分支的head指针，也就是最新的提交
 ```
 git diff c8cb16c8fac96 8da976aaa
+git diff 分支1  分支2
+git diff 分支1  分支2  文件
 ```
-
-
 
 ##其他操作
 ###1.重命名文件
