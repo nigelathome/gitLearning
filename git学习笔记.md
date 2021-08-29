@@ -48,7 +48,18 @@ git commit -am '改动内容'
 ```
 ###4.清除暂存区和工作目录所有改动
 ```
-git rest --hard
+git reset --hard
+```
+###5.取消放入暂存区的改动
+这样一个场景，已经把改动放入了暂存区但有发现工作区的改动更好，于是想把暂存区的内容撤回，通过修改工作区的改动再放入暂存区
+```
+git reset HEAD
+git reset HEDA -- 文件1 文件2 ...
+```
+###5.取消放入暂存区的改动
+这样一个场景，发现工作区的修改不如已经放入了暂存区的修改好，于是想把暂存区的内容同步到工作区，然后基于通过的内容继续进行开发
+```
+git checkout -- 文件1 文件2 ...
 ```
 
 ##分支管理
@@ -77,6 +88,19 @@ git branch branch名字 commitID
 ###6.删除分支
 ```
 git branch -d 分支名
+```
+
+###7.查看暂存区和head的差异
+当把内容通过git add之后，更改的内容就存入了暂存区，查看暂存区和当前head的差异
+```
+git diff --cached
+```
+
+###8. 查看工作区和暂存区的差异
+工作区就是当前没有git add的改动，比较暂存区和工作区的差异
+```
+git diff 
+git diff -- 文件名1 文件名2 ...
 ```
 
 ##堆栈
@@ -124,13 +148,13 @@ git rebase -i e62cc
 ```
 进入交互界面。此时找到dfgga这个提交，将pick改成`reword`。然后会进入一个关于dfgga的编辑界面，进行对commit的编辑，然后保存即可
 
-###3.合并多个commit
-假设这样的创建，我想合并commit1，commit2，commit3.那么我找到这3个commit中的父commit id。假设1是最新的commit
+###3.合并多个连续的commit
+假设这样的场景，需要合并三个连续的commit1，commit2，commit3.找到这3个commit中的父commit id。假设1是最新的commit
 
 ```
 git rebase -i {父commit id}
 ```
-进入编辑界面后，将commit2和commit3的操作变成squash（挤压）
+进入编辑界面后，将commit2和commit3的操作变成squash（压缩）
 
 ```
 pick commit1
@@ -139,7 +163,30 @@ s commit3
 pick other
 ```
 保存后进入commit1的编辑界面，编辑commit，然后保存退出即可
-###3.合并远端分支
+
+###4. 合并多个不连续的commit
+假设这样的创建，需要合并commit1，commit3.中间隔着一个commit2. 同样找到这2个commit中的父commit id。假设1是最新的commit
+
+```
+git rebase -i {夫commit id}
+```
+看到编辑界面下有这样的记录：
+```
+pick commit1
+pick commit2
+pick commit3
+pick other
+```
+将commit3对应的删除掉，并放到commit1和commit2中间添加一条记录squash commit3，编辑记录变成：
+```
+pick commit1
+s commit3
+pick commit2
+pick other
+```
+保存后进入commit1的编辑界面，编辑commit，然后保存退出即可
+
+###5.合并远端分支
 作用等同于git pull（git fetch然后再merge），不同的是这个操作完成之后不会产生无效的commit
 
 ```
@@ -203,6 +250,8 @@ git log --all --graph
 git diff c8cb16c8fac96 8da976aaa
 ```
 
+
+
 ##其他操作
 ###1.重命名文件
 ```
@@ -247,3 +296,4 @@ git status
 6.tag是里程碑的含义，可以用来给上线版本打标记  
 7.头指针HEAD通常会跟一个分支绑定，例如HEAD -> master。如果HEAD不指向具体的分支，只指向commit，此时就是分离头指针的状态。分离头指针下做的commit，在切换到别的分支的时候可能会被丢弃。要想保留变更需要建立一个分支和这个变更挂钩，例如 git branch <branch-name> commit-id（基于commit-id建立分支)
 8.HEAD指代当前的提交，`HEAD~n`指代当前提交的n级祖先
+9. 变更暂存区的命令与git reset修改，变更工作区的命令与git checkout修改
