@@ -138,6 +138,12 @@ git stash drop n
 git stash clear
 ```
 
+###6、使用最新的堆栈记录
+```
+git stash pop
+```
+git stash pop之后该条堆栈记录会被从堆栈中删除
+
 ##变基
 ###1.修改最近一次commit msg
 
@@ -268,7 +274,7 @@ git rm file
 ```
 ###3.不需要git管理
 编辑`.gitignore`文件。例如要忽略xcodeproj和xcworkspace，以及Pods下的文件
-
+其中对一个文件名加斜杠和不加斜杠区别是：不加斜杠的表示这个文件或者这个目录下的全部文件都会被忽略；加斜杠的表示这个目录下的全部文件会被忽略，但是这个文件会被git管理。例如*.xcodeproj/代表了*.xcodeproj这个工程命令下的文件不需要git管控，而文件*.xcodeproj本身的改动是git需要管控的
 ```
 .xcbkptlist
 *.xcuserstate
